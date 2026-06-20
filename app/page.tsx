@@ -519,416 +519,172 @@ export default function Home() {
         
         {/* =======================================================
             TAB 1: LIVE SIMULATOR VIEW
+            ==========        {/* =======================================================
+            TAB 1: LIVE SIMULATOR VIEW (MATCH CENTER DASHBOARD)
             ======================================================= */}
         {activeTab === 'simulator' && (
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-            
-            {/* LEFT COLUMN: SIMULATION CONTROL & LIVE STATE */}
-            <div className="lg:col-span-2 flex flex-col gap-6">
-              
-              {/* MATCH SELECTOR & STATUS CARDS */}
-              <div className="bg-white/90 backdrop-blur-sm border border-green-100 rounded-2xl p-5 shadow-[0_8px_30px_rgb(0,0,0,0.04)] flex flex-col gap-4 transition-all hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)]">
-                <div className="flex justify-between items-center flex-wrap gap-3">
-                  <div>
-                    <span className="text-[10px] text-emerald-800 font-extrabold tracking-wider uppercase bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded">
-                      Simulate Match Feed
+          <div className="flex flex-col gap-6">
+            <div className="bg-white/90 backdrop-blur-sm border border-green-150 rounded-2xl p-6 shadow-[0_8px_30px_rgb(0,0,0,0.04)] flex flex-col md:flex-row md:items-center justify-between gap-4">
+              <div>
+                <span className="text-[10px] text-emerald-800 font-extrabold tracking-wider uppercase bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded">
+                  🏟️ Match Center
+                </span>
+                <h2 className="text-xl font-bold text-zinc-800 mt-1.5">Live Match Simulation Arena</h2>
+                <p className="text-xs text-zinc-500 mt-0.5">Select a live match scenario to track win probabilities and score projections in a new window.</p>
+              </div>
+              <span className="flex items-center gap-2 px-3 py-1.5 bg-red-50 border border-red-200 text-[10px] font-black text-red-700 uppercase rounded-full self-start md:self-auto animate-pulse">
+                <span className="w-2 h-2 bg-red-600 rounded-full" /> 3 Matches Live
+              </span>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {/* MATCH CARD 1: IND vs PAK */}
+              <div className="bg-white/90 backdrop-blur-sm border border-green-100 rounded-2xl p-6 shadow-[0_8px_30px_rgb(0,0,0,0.03)] flex flex-col justify-between gap-6 transition-all duration-300 hover:shadow-[0_12px_40px_rgba(0,0,0,0.06)] hover:-translate-y-1 relative overflow-hidden group">
+                <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-emerald-500/10 to-teal-500/10 rounded-full blur-xl group-hover:scale-150 transition-all duration-500" />
+                
+                <div className="flex flex-col gap-4">
+                  <div className="flex justify-between items-center">
+                    <span className="text-[10px] bg-red-50 text-red-750 border border-red-100 px-2 py-0.5 font-bold uppercase rounded-md tracking-wider flex items-center gap-1.5">
+                      <span className="w-1.5 h-1.5 bg-red-650 rounded-full animate-ping" /> Live
                     </span>
-                    <h3 className="text-sm font-bold text-zinc-650 mt-1">Select a Live Scenario to track</h3>
+                    <span className="text-[10px] font-extrabold text-zinc-400 uppercase tracking-widest">T20 World Cup</span>
                   </div>
 
-                  <select
-                    value={selectedPresetId}
-                    onChange={(e) => setSelectedPresetId(e.target.value)}
-                    disabled={isPlaying}
-                    className="bg-white text-zinc-800 border border-green-300 rounded-full py-1.5 px-4 text-xs font-bold focus:outline-none focus:ring-2 focus:ring-green-500 cursor-pointer disabled:opacity-50 transition-all shadow-sm hover:border-green-400"
-                  >
-                    <option value="ind-pak">IND vs PAK (T20 World Cup - 1st Innings)</option>
-                    <option value="csk-mi">CSK vs MI (IPL Derby - 2nd Innings)</option>
-                    <option value="aus-eng">AUS vs ENG (ODI Ashes - 1st Innings)</option>
-                  </select>
-                </div>
-
-                <hr className="border-zinc-200/60" />
-
-                {/* Scoreboard display (Iconic Premium Green scoreboard banner style) */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-center">
-                  
-                  {/* Score, Wickets, Overs */}
-                  <div className="flex items-center gap-4 bg-gradient-to-br from-green-700 via-emerald-600 to-teal-800 text-white p-5 rounded-2xl shadow-lg relative overflow-hidden group">
-                    <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full blur-2xl transform translate-x-10 -translate-y-10 group-hover:translate-x-5 transition-transform duration-700" />
-                    <div className="flex-1 relative z-10">
+                  <div className="flex flex-col gap-3">
+                    <div className="flex items-center justify-between">
                       <div className="flex items-center gap-2">
-                        <span className="w-3 h-3 rounded-full border border-white/50" style={{ backgroundColor: simMatchState.battingTeam.color }} />
-                        <h2 className="text-xl font-black tracking-tight">{simMatchState.battingTeam.code}</h2>
-                        <span className="text-xs font-semibold text-emerald-200">vs</span>
-                        <span className="text-xs font-bold text-emerald-100">{simMatchState.bowlingTeam.code}</span>
+                        <span className="w-3 h-3 rounded-full bg-blue-650 border border-zinc-200" />
+                        <span className="font-extrabold text-sm text-zinc-800">India</span>
                       </div>
-                      <div className="text-4xl font-extrabold tracking-tighter mt-1">
-                        {simMatchState.score}
-                        <span className="text-2xl font-bold text-emerald-200">/{simMatchState.wickets}</span>
-                      </div>
+                      <span className="font-black text-sm text-zinc-800">104/3 <span className="text-[10px] text-zinc-400 font-semibold">(12.0 ov)</span></span>
                     </div>
-                    
-                    <div className="text-right">
-                      <div className="text-[10px] font-extrabold text-emerald-250 uppercase tracking-widest">Overs Bowled</div>
-                      <div className="text-2xl font-black tracking-tight mt-0.5 text-white">
-                        {simMatchState.overs}
-                        <span className="text-sm font-bold text-emerald-200">.{simMatchState.balls}</span>
-                        <span className="text-xs font-normal text-emerald-300">/{simMatchState.format === 'T20' ? '20' : '50'}</span>
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-2">
+                        <span className="w-3 h-3 rounded-full bg-emerald-650 border border-zinc-200" />
+                        <span className="font-bold text-sm text-zinc-500">Pakistan</span>
                       </div>
-                      <div className="text-[10px] text-emerald-100 font-bold mt-1">
-                        CRR: {((simMatchState.score / Math.max(1, (simMatchState.overs * 6 + simMatchState.balls))) * 6).toFixed(2)}
-                      </div>
+                      <span className="text-xs text-zinc-400 font-bold">Yet to Bat</span>
                     </div>
                   </div>
 
-                  {/* Chasing Target Status (if chasing) */}
-                  {simMatchState.innings === '2nd' && simMatchState.target ? (
-                    <div className="bg-emerald-50/50 border border-emerald-200 p-4 rounded-xl flex flex-col justify-center shadow-inner">
-                      <div className="text-xs font-bold text-emerald-800 uppercase tracking-wider">Chasing Target</div>
-                      <div className="text-2xl font-black tracking-tight mt-0.5 text-zinc-900">
-                        {simMatchState.target}
-                        <span className="text-xs text-zinc-650 font-bold ml-2">
-                          Need {simMatchState.target - simMatchState.score} runs in {Math.max(0, (simMatchState.format === 'T20' ? 120 : 300) - (simMatchState.overs * 6 + simMatchState.balls))} balls
-                        </span>
-                      </div>
-                      <div className="text-[10px] text-zinc-500 font-bold mt-1 uppercase">
-                        Required RR: {(((simMatchState.target - simMatchState.score) / Math.max(1, (simMatchState.format === 'T20' ? 120 : 300) - (simMatchState.overs * 6 + simMatchState.balls))) * 6).toFixed(2)} RPO
-                      </div>
-                    </div>
-                  ) : (
-                    <div className="bg-zinc-50/80 border border-zinc-200 p-4 rounded-xl flex flex-col justify-center shadow-inner">
-                      <div className="text-[10px] font-extrabold text-zinc-500 uppercase tracking-wider">Venue & Pitch</div>
-                      <div className="text-sm font-extrabold text-zinc-800 mt-1 flex items-center gap-1.5">
-                        <MapPin className="w-3.5 h-3.5 text-emerald-750" />
-                        {simMatchState.venue.name}
-                      </div>
-                      <div className="text-[10px] text-zinc-600 mt-1 font-bold">
-                        Pitch: {simMatchState.pitchType} | Avg First Innings: {simMatchState.format === 'T20' ? simMatchState.venue.avgFirstInningsT20 : simMatchState.venue.avgFirstInningsODI}
-                      </div>
-                    </div>
-                  )}
-                </div>
+                  <hr className="border-zinc-100" />
 
-                {/* Over Ball-by-ball Timeline */}
-                <div className="bg-zinc-50 border border-zinc-200 p-3.5 rounded-xl flex items-center justify-between gap-4">
-                  <div className="text-[10px] font-extrabold text-zinc-500 uppercase tracking-wider">
-                    Current Over:
-                  </div>
-                  
-                  <div className="flex items-center gap-2 overflow-x-auto py-1">
-                    {simMatchState.currentOverHistory.length === 0 ? (
-                      <span className="text-xs text-zinc-400 italic font-medium">Waiting for bowler...</span>
-                    ) : (
-                      simMatchState.currentOverHistory.map((ball, i) => {
-                        let colorClass = 'bg-white text-zinc-700 border-zinc-300';
-                        if (ball === 'W') colorClass = 'bg-red-650 text-white border-red-700 font-black';
-                        else if (ball === '4' || ball === '6') colorClass = 'bg-emerald-650 text-white border-emerald-700 font-bold';
-                        return (
-                          <span
-                            key={i}
-                            className={`w-7 h-7 flex items-center justify-center rounded-full border text-xs font-bold shrink-0 ${colorClass}`}
-                          >
-                            {ball}
-                          </span>
-                        );
-                      })
-                    )}
+                  <div className="flex flex-col gap-1.5 text-xs text-zinc-505">
+                    <div className="flex items-center gap-1.5">
+                      <MapPin className="w-3.5 h-3.5 text-green-700" />
+                      <span className="font-semibold text-zinc-650">Narendra Modi Stadium</span>
+                    </div>
+                    <div className="text-[10px] text-zinc-400 ml-5 font-semibold">Pitch: Balanced | 1st Innings</div>
                   </div>
                 </div>
 
-                {/* Simulator Playback Controls */}
-                <div className="flex items-center justify-between flex-wrap gap-4 mt-2">
-                  <div className="flex items-center gap-3">
-                    <Button
-                      onClick={() => setIsPlaying(!isPlaying)}
-                      variant={isPlaying ? 'outline' : 'default'}
-                      size="sm"
-                      className={`gap-1.5 font-bold text-xs rounded-full transition-all duration-300 transform hover:scale-105 active:scale-95 ${
-                        isPlaying 
-                          ? 'border-amber-500 text-amber-700 hover:bg-amber-50 shadow-[0_0_15px_rgba(245,158,11,0.3)] animate-pulse' 
-                          : 'bg-gradient-to-r from-red-600 to-red-500 hover:from-red-500 hover:to-red-400 text-white shadow-[0_4px_14px_0_rgba(220,38,38,0.39)] hover:shadow-[0_6px_20px_rgba(220,38,38,0.23)] border-none'
-                      }`}
-                    >
-                      {isPlaying ? (
-                        <>
-                          <Pause className="w-4 h-4 fill-current" /> Pause
-                        </>
-                      ) : (
-                        <>
-                          <Play className="w-4 h-4 fill-current" /> Play Live
-                        </>
-                      )}
-                    </Button>
-
-                    <Button
-                      onClick={simulateNextBall}
-                      disabled={isPlaying}
-                      variant="outline"
-                      size="sm"
-                      className="gap-1 font-bold text-xs rounded-full border-green-600 text-green-700 hover:bg-green-600 hover:text-white transition-all duration-300 transform hover:scale-105 active:scale-95 disabled:opacity-50 disabled:transform-none"
-                    >
-                      Next Ball <ChevronRight className="w-4 h-4" />
-                    </Button>
-
-                    <Button
-                      onClick={resetSimulator}
-                      variant="ghost"
-                      size="sm"
-                      className="gap-1 font-bold text-xs text-zinc-500 hover:text-zinc-900 rounded-full hover:bg-zinc-100 transition-all duration-300"
-                    >
-                      <RotateCcw className="w-3.5 h-3.5" /> Reset
-                    </Button>
-                  </div>
-
-                  {/* Playback speed selector */}
-                  <div className="flex items-center gap-2 bg-green-50 border border-green-200 p-1 px-2.5 rounded-full text-xs shadow-inner">
-                    <span className="text-green-800 font-bold text-[10px] uppercase ml-1">Speed:</span>
-                    <button
-                      onClick={() => setSimulationSpeed(2500)}
-                      className={`px-2 py-0.5 rounded-full font-bold text-[10px] transition-all ${simulationSpeed === 2500 ? 'bg-green-600 text-white shadow-md transform scale-105' : 'text-green-700 hover:bg-green-100'}`}
-                    >
-                      1x
-                    </button>
-                    <button
-                      onClick={() => setSimulationSpeed(1200)}
-                      className={`px-2 py-0.5 rounded-full font-bold text-[10px] transition-all ${simulationSpeed === 1200 ? 'bg-green-600 text-white shadow-md transform scale-105' : 'text-green-700 hover:bg-green-100'}`}
-                    >
-                      2x
-                    </button>
-                    <button
-                      onClick={() => setSimulationSpeed(400)}
-                      className={`px-2 py-0.5 rounded-full font-bold text-[10px] transition-all ${simulationSpeed === 400 ? 'bg-gradient-to-r from-amber-500 to-orange-500 text-white shadow-md transform scale-105' : 'text-green-700 hover:bg-green-100'}`}
-                    >
-                      Turbo
-                    </button>
-                  </div>
-                </div>
+                <a
+                  href="/live?match=ind-pak"
+                  target="_blank"
+                  className="w-full py-2.5 bg-gradient-to-r from-green-600 to-emerald-700 hover:from-green-500 hover:to-emerald-650 text-white rounded-xl font-bold text-xs text-center shadow-[0_4px_12px_rgba(16,185,129,0.25)] transition-all duration-300 transform active:scale-95 flex items-center justify-center gap-2"
+                >
+                  🏟️ Launch Live Match Tracker
+                </a>
               </div>
 
-              {/* BATTER & BOWLER CARDS */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {/* MATCH CARD 2: CSK vs MI */}
+              <div className="bg-white/90 backdrop-blur-sm border border-green-100 rounded-2xl p-6 shadow-[0_8px_30px_rgb(0,0,0,0.03)] flex flex-col justify-between gap-6 transition-all duration-300 hover:shadow-[0_12px_40px_rgba(0,0,0,0.06)] hover:-translate-y-1 relative overflow-hidden group">
+                <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-amber-500/10 to-blue-500/10 rounded-full blur-xl group-hover:scale-150 transition-all duration-500" />
                 
-                {/* Batting Card */}
-                <div className="bg-white/90 backdrop-blur-sm border border-green-100 rounded-2xl p-4 flex flex-col gap-3 shadow-[0_8px_30px_rgb(0,0,0,0.04)] transition-all hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)]">
-                  <h4 className="text-xs font-extrabold text-zinc-550 uppercase tracking-wider">Current Batter Partnership</h4>
-                  
-                  <div className="flex flex-col gap-2.5">
-                    {/* Striker */}
-                    <div className="flex justify-between items-center bg-emerald-50/30 p-2.5 rounded-lg border-l-2 border-emerald-600 border-r border-t border-b border-zinc-200">
-                      <div>
-                        <div className="text-xs font-black flex items-center gap-1.5 text-zinc-800">
-                          {simMatchState.striker.name}
-                          <span className="w-1.5 h-1.5 rounded-full bg-emerald-600 animate-pulse" title="Striking" />
-                        </div>
-                        <div className="text-[10px] text-zinc-550 font-bold mt-0.5">S/R: {simMatchState.striker.balls > 0 ? ((simMatchState.striker.runs / simMatchState.striker.balls) * 100).toFixed(1) : '0.0'}</div>
-                      </div>
-                      <div className="text-sm font-black text-zinc-850">
-                        {simMatchState.striker.runs}
-                        <span className="text-[10px] font-bold text-zinc-500"> ({simMatchState.striker.balls})</span>
-                      </div>
-                    </div>
+                <div className="flex flex-col gap-4">
+                  <div className="flex justify-between items-center">
+                    <span className="text-[10px] bg-red-50 text-red-750 border border-red-100 px-2 py-0.5 font-bold uppercase rounded-md tracking-wider flex items-center gap-1.5">
+                      <span className="w-1.5 h-1.5 bg-red-650 rounded-full animate-ping" /> Live
+                    </span>
+                    <span className="text-[10px] font-extrabold text-zinc-400 uppercase tracking-widest">IPL Derby</span>
+                  </div>
 
-                    {/* Non-Striker */}
-                    <div className="flex justify-between items-center bg-white p-2.5 rounded-lg border border-zinc-200">
-                      <div>
-                        <div className="text-xs font-bold text-zinc-700">
-                          {simMatchState.nonStriker.name}
-                        </div>
-                        <div className="text-[10px] text-zinc-500 font-bold mt-0.5">S/R: {simMatchState.nonStriker.balls > 0 ? ((simMatchState.nonStriker.runs / simMatchState.nonStriker.balls) * 100).toFixed(1) : '0.0'}</div>
+                  <div className="flex flex-col gap-3">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-2">
+                        <span className="w-3 h-3 rounded-full bg-blue-700 border border-zinc-200" />
+                        <span className="font-bold text-sm text-zinc-500">Mumbai Indians</span>
                       </div>
-                      <div className="text-xs font-bold text-zinc-700">
-                        {simMatchState.nonStriker.runs}
-                        <span className="text-[10px] font-bold text-zinc-500"> ({simMatchState.nonStriker.balls})</span>
-                      </div>
+                      <span className="font-semibold text-xs text-zinc-550">181/6 <span className="text-[10px] text-zinc-400 font-semibold">(20.0 ov)</span></span>
                     </div>
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-2">
+                        <span className="w-3 h-3 rounded-full bg-amber-400 border border-zinc-200" />
+                        <span className="font-extrabold text-sm text-zinc-800">Chennai Super Kings</span>
+                      </div>
+                      <span className="font-black text-sm text-zinc-800">132/4 <span className="text-[10px] text-zinc-400 font-semibold">(14.3 ov)</span></span>
+                    </div>
+                  </div>
+
+                  <hr className="border-zinc-100" />
+
+                  <div className="flex flex-col gap-1.5 text-xs text-zinc-505">
+                    <div className="flex items-center gap-1.5">
+                      <MapPin className="w-3.5 h-3.5 text-green-700" />
+                      <span className="font-semibold text-zinc-650">Wankhede Stadium</span>
+                    </div>
+                    <div className="text-[10px] text-zinc-400 ml-5 font-semibold">Pitch: Flat | CSK Needs 50 runs in 33 balls</div>
                   </div>
                 </div>
 
-                {/* Bowling Card */}
-                <div className="bg-white/90 backdrop-blur-sm border border-green-100 rounded-2xl p-4 flex flex-col gap-3 shadow-[0_8px_30px_rgb(0,0,0,0.04)] transition-all hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)]">
-                  <h4 className="text-xs font-extrabold text-zinc-550 uppercase tracking-wider">Active Bowler</h4>
-                  
-                  <div className="flex justify-between items-center bg-emerald-50/10 p-2.5 rounded-lg border border-zinc-205">
-                    <div>
-                      <div className="text-xs font-black text-zinc-800">
-                        {simMatchState.bowler.name}
-                      </div>
-                      <div className="text-[10px] text-zinc-550 font-bold mt-0.5">
-                        Econ: {((simMatchState.score / Math.max(1, simMatchState.overs * 6 + simMatchState.balls)) * 6).toFixed(2)}
-                      </div>
-                    </div>
-                    <div className="text-right">
-                      <div className="text-sm font-black text-zinc-800">
-                        {simMatchState.bowler.wickets} <span className="text-[10px] font-bold text-zinc-500">wkts</span>
-                      </div>
-                      <div className="text-[10px] text-zinc-550 font-bold mt-0.5">
-                        {simMatchState.overs}.{simMatchState.balls} overs
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
+                <a
+                  href="/live?match=csk-mi"
+                  target="_blank"
+                  className="w-full py-2.5 bg-gradient-to-r from-green-600 to-emerald-700 hover:from-green-500 hover:to-emerald-650 text-white rounded-xl font-bold text-xs text-center shadow-[0_4px_12px_rgba(16,185,129,0.25)] transition-all duration-300 transform active:scale-95 flex items-center justify-center gap-2"
+                >
+                  🏟️ Launch Live Match Tracker
+                </a>
               </div>
 
-              {/* LIVE PROJECTION GRAPH */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {simMatchState.innings === '2nd' && simMatchState.target ? (
-                  <TrendLineChart
-                    data={simMatchState.history.map(h => ({ over: h.over, value: h.winProb ?? 50 }))}
-                    yLabel="CSK Win Probability %"
-                    yMin={0}
-                    yMax={100}
-                    color="#F9CD05"
-                  />
-                ) : (
-                  <TrendLineChart
-                    data={simMatchState.history.map(h => ({ over: h.over, value: h.projectedScore ?? 160 }))}
-                    yLabel="Projected Final Score"
-                    yMin={Math.max(50, (simPrediction?.projectedScore ?? 180) - 60)}
-                    yMax={(simPrediction?.projectedScore ?? 180) + 60}
-                    color="#10b981"
-                  />
-                )}
-
-                {/* MONTE CARLO BELL CURVE FOR FIRST INNINGS */}
-                {simMatchState.innings === '1st' && simPrediction ? (
-                  <ScoreDistributionChart
-                    projectedScore={simPrediction.projectedScore}
-                    range={simPrediction.projectedRange}
-                    color="#10b981"
-                  />
-                ) : (
-                  // Chasing Status info panel for second innings
-                  <div className="bg-white border border-zinc-200/80 rounded-xl p-4 flex flex-col justify-center shadow-sm">
-                    <h4 className="text-xs font-extrabold text-zinc-550 uppercase tracking-wider mb-2">Chasing Analytics</h4>
-                    <div className="grid grid-cols-2 gap-3 text-xs">
-                      <div className="bg-zinc-50 p-2.5 rounded-lg border border-zinc-200">
-                        <span className="text-[10px] text-zinc-500 uppercase font-bold">Runs Required</span>
-                        <div className="text-lg font-black mt-0.5 text-zinc-800">{simMatchState.target ? simMatchState.target - simMatchState.score : 0} runs</div>
-                      </div>
-                      <div className="bg-zinc-50 p-2.5 rounded-lg border border-zinc-200">
-                        <span className="text-[10px] text-zinc-500 uppercase font-bold">Balls Left</span>
-                        <div className="text-lg font-black mt-0.5 text-zinc-800">
-                          {Math.max(0, (simMatchState.format === 'T20' ? 120 : 300) - (simMatchState.overs * 6 + simMatchState.balls))}
-                        </div>
-                      </div>
-                    </div>
-                    <div className="mt-3 text-[11px] text-zinc-650 bg-zinc-50 p-2.5 rounded-lg border border-zinc-200 italic font-medium">
-                      Monte Carlo simulations are evaluating batters\' wicket risks versus boundary capabilities.
-                    </div>
-                  </div>
-                )}
-              </div>
-
-            </div>
-
-            {/* RIGHT COLUMN: AI ANALYTICAL DASHBOARD */}
-            <div className="flex flex-col gap-6">
-              
-              {/* WIN PROBABILITY GAUGE */}
-              {simPrediction && (
-                <WinProbabilityGauge
-                  value={simPrediction.winProbability}
-                  batTeamCode={simMatchState.battingTeam.code}
-                  bowTeamCode={simMatchState.bowlingTeam.code}
-                  batColor={simMatchState.battingTeam.color}
-                  bowColor={simMatchState.bowlingTeam.color}
-                />
-              )}
-
-              {/* DYNAMIC CALCULATOR STATS */}
-              <div className="bg-white/90 backdrop-blur-sm border border-green-100 rounded-2xl p-5 shadow-[0_8px_30px_rgb(0,0,0,0.04)] flex flex-col gap-4 transition-all hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)]">
-                <h3 className="text-xs font-extrabold text-zinc-700 uppercase tracking-wider flex items-center gap-1.5">
-                  <Cpu className="w-3.5 h-3.5 text-emerald-650" /> AI Prediction Output
-                </h3>
-
-                {simPrediction ? (
-                  <div className="flex flex-col gap-4">
-                    {/* Projection Card */}
-                    <div className="bg-emerald-50/50 p-4 rounded-xl border border-emerald-100 shadow-inner">
-                      {simMatchState.innings === '1st' ? (
-                        <>
-                          <div className="text-xs text-emerald-800 font-bold uppercase">Projected Score</div>
-                          <div className="text-4xl font-black tracking-tight mt-1 text-emerald-700">
-                            {simPrediction.projectedScore}
-                          </div>
-                          <div className="text-[10px] text-emerald-900 font-bold mt-1">
-                            Likely range: {simPrediction.projectedRange[0]} - {simPrediction.projectedRange[1]} runs
-                          </div>
-                        </>
-                      ) : (
-                        <>
-                          <div className="text-xs text-emerald-800 font-bold uppercase">Win Probability</div>
-                          <div className="text-4xl font-black tracking-tight mt-1 text-emerald-700">
-                            {simPrediction.winProbability}%
-                          </div>
-                          <div className="text-[10px] text-emerald-900 font-bold mt-1">
-                            {simMatchState.battingTeam.name} Win Likelihood
-                          </div>
-                        </>
-                      )}
-                    </div>
-
-                    {/* Insight Badges */}
-                    <div className="grid grid-cols-2 gap-3 text-xs">
-                      <div className="bg-zinc-50 p-3 rounded-lg border border-zinc-200 flex flex-col shadow-inner">
-                        <span className="text-[10px] text-zinc-500 uppercase font-bold">Risk Level</span>
-                        <span className={`text-sm font-black mt-1 uppercase ${
-                          simPrediction.riskLevel === 'Low' ? 'text-emerald-700' :
-                          simPrediction.riskLevel === 'Medium' ? 'text-amber-600' : 'text-red-650'
-                        }`}>
-                          {simPrediction.riskLevel}
-                        </span>
-                      </div>
-
-                      <div className="bg-zinc-50 p-3 rounded-lg border border-zinc-200 flex flex-col shadow-inner">
-                        <span className="text-[10px] text-zinc-500 uppercase font-bold">Pace Assist</span>
-                        <span className="text-sm font-black mt-1 text-zinc-700">
-                          {simMatchState.venue.paceAssist}/5 (High)
-                        </span>
-                      </div>
-                    </div>
-
-                    {/* AI Strategic Commentary */}
-                    <div className="flex flex-col gap-2">
-                      <div className="text-[10px] font-extrabold text-zinc-500 uppercase tracking-wider">AI Strategic Insights</div>
-                      <div className="flex flex-col gap-2">
-                        {simPrediction.keyInsights.map((insight, idx) => (
-                          <div key={idx} className="flex gap-2 text-xs bg-zinc-50 p-2.5 rounded-lg border border-zinc-200 text-zinc-700">
-                            <Sparkles className="w-4 h-4 text-amber-500 shrink-0 mt-0.5" />
-                            <p className="font-medium">{insight}</p>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                ) : (
-                  <div className="text-xs text-zinc-400 text-center py-6">
-                    Running prediction calculations...
-                  </div>
-                )}
-              </div>
-
-              {/* LIVE COMMENTARY / LOG FEED */}
-              <div className="bg-white/90 backdrop-blur-sm border border-green-100 rounded-2xl p-4 shadow-[0_8px_30px_rgb(0,0,0,0.04)] flex flex-col h-64 transition-all hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)]">
-                <h3 className="text-xs font-extrabold text-zinc-750 uppercase tracking-wider mb-2 flex items-center justify-between">
-                  <span>📻 Live Text Commentary</span>
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-600 animate-ping" />
-                </h3>
+              {/* MATCH CARD 3: AUS vs ENG */}
+              <div className="bg-white/90 backdrop-blur-sm border border-green-100 rounded-2xl p-6 shadow-[0_8px_30px_rgb(0,0,0,0.03)] flex flex-col justify-between gap-6 transition-all duration-300 hover:shadow-[0_12px_40px_rgba(0,0,0,0.06)] hover:-translate-y-1 relative overflow-hidden group">
+                <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-yellow-500/10 to-red-500/10 rounded-full blur-xl group-hover:scale-150 transition-all duration-500" />
                 
-                <div className="flex-1 bg-zinc-50 rounded-lg p-3 border border-zinc-200 overflow-y-auto font-mono text-[11px] text-zinc-700 flex flex-col gap-2 shadow-inner">
-                  {commentary.map((line, idx) => (
-                    <div key={idx} className="border-b border-zinc-200/60 pb-1.5 leading-relaxed font-semibold">
-                      {line}
+                <div className="flex flex-col gap-4">
+                  <div className="flex justify-between items-center">
+                    <span className="text-[10px] bg-red-50 text-red-750 border border-red-100 px-2 py-0.5 font-bold uppercase rounded-md tracking-wider flex items-center gap-1.5">
+                      <span className="w-1.5 h-1.5 bg-red-650 rounded-full animate-ping" /> Live
+                    </span>
+                    <span className="text-[10px] font-extrabold text-zinc-400 uppercase tracking-widest">ODI Ashes</span>
+                  </div>
+
+                  <div className="flex flex-col gap-3">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-2">
+                        <span className="w-3 h-3 rounded-full bg-yellow-500 border border-zinc-200" />
+                        <span className="font-extrabold text-sm text-zinc-800">Australia</span>
+                      </div>
+                      <span className="font-black text-sm text-zinc-800">205/4 <span className="text-[10px] text-zinc-400 font-semibold">(38.0 ov)</span></span>
                     </div>
-                  ))}
-                  <div ref={commentaryEndRef} />
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-2">
+                        <span className="w-3 h-3 rounded-full bg-sky-800 border border-zinc-200" />
+                        <span className="font-bold text-sm text-zinc-500">England</span>
+                      </div>
+                      <span className="text-xs text-zinc-400 font-bold">Yet to Bat</span>
+                    </div>
+                  </div>
+
+                  <hr className="border-zinc-100" />
+
+                  <div className="flex flex-col gap-1.5 text-xs text-zinc-505">
+                    <div className="flex items-center gap-1.5">
+                      <MapPin className="w-3.5 h-3.5 text-green-700" />
+                      <span className="font-semibold text-zinc-650">Lord's Cricket Ground</span>
+                    </div>
+                    <div className="text-[10px] text-zinc-400 ml-5 font-semibold">Pitch: Green | 1st Innings</div>
+                  </div>
                 </div>
+
+                <a
+                  href="/live?match=aus-eng"
+                  target="_blank"
+                  className="w-full py-2.5 bg-gradient-to-r from-green-600 to-emerald-700 hover:from-green-500 hover:to-emerald-650 text-white rounded-xl font-bold text-xs text-center shadow-[0_4px_12px_rgba(16,185,129,0.25)] transition-all duration-300 transform active:scale-95 flex items-center justify-center gap-2"
+                >
+                  🏟️ Launch Live Match Tracker
+                </a>
               </div>
-
             </div>
-
           </div>
         )}
 
